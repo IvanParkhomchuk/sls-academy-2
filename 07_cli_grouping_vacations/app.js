@@ -1,18 +1,18 @@
 const fs = require('fs');
 
-const myFunc = async () => {
+const groupVacations = async () => {
     try {
         const response = await fetch('https://jsonbase.com/sls-team/vacations');
         const users = await response.json();
 
         const userNamesArray = [];
 
-        users.forEach(user => {
-            userNamesArray.push(user.user.name);
+        users.forEach(userObj => {
+            userNamesArray.push(userObj.user.name);
         });
 
         const userUniqueNamesArray = Array.from(new Set(userNamesArray));
-        const newUserArray = [];
+        const resultUsersArray = [];
 
         userUniqueNamesArray.forEach(userName => {
             const userObjArr = users.filter(user => user.user.name === userName);
@@ -31,7 +31,7 @@ const myFunc = async () => {
                 newUserObj.vacations.push(vacationDatesObj);
             });
 
-            newUserArray.push(newUserObj);
+            resultUsersArray.push(newUserObj);
         });
 
         fs.writeFile('./users.json', JSON.stringify(newUserArray), (err) => {
@@ -44,4 +44,4 @@ const myFunc = async () => {
     }
 };
 
-myFunc();
+groupVacations();
