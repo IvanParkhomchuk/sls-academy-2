@@ -23,7 +23,7 @@ const sendRequest = async (api) => {
     return response;
 };
 
-const myFunc = async () => {
+const booleanCounter = async () => {
     let trueCount = 0;
     let falseCount = 0;
 
@@ -33,7 +33,7 @@ const myFunc = async () => {
 
             if (!response.ok) {
                 console.log(`[FAIL] ${api}: The endpoint is unavailable`);
-                continue
+                continue;
             }
 
             const data = await response.json();
@@ -60,4 +60,4 @@ const myFunc = async () => {
     }
 }
 
-myFunc();
+booleanCounter();
